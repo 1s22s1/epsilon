@@ -6,15 +6,15 @@ module Epsilon
     end
 
     function isaccept(arrows, string)
-        currentNode = 0
+        currentNodes = [0]
 
         for char ∈ split(string, "")
-            if needEpsilonTransition(currentNode, arrows)
+            if needEpsilonTransition(currentNodes, arrows)
             end
         end
 
         return true
     end
 
-    needEpsilonTransition(currentNode, arrows) = !isempty(findall(arrow->arrow.fromNode == currentNode && arrow.value == "ϵ", arrows))
+    needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow->arrow.fromNode ∈ currentNodes && arrow.value == "ϵ", arrows))
 end
