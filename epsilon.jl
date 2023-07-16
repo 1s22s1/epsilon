@@ -8,13 +8,19 @@ module Epsilon
     function isaccept(arrows, string)
         currentNodes = [0]
 
-        for char ∈ split(string, "")
+        for targetChar ∈ split(string, "")
             while needEpsilonTransition(currentNodes, arrows)
                 currentNodes = epsilonTransition(currentNodes, arrows)
             end
+
+            currentNodes = transition(currentNodes, arrows, targetChar)
+
+            if isempty(currentNodes)
+                return false
+            end
         end
 
-        return true
+        true
     end
 
     function transition(currentNodes, arrows, targetChar)
