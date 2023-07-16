@@ -9,7 +9,8 @@ module Epsilon
         currentNodes = [0]
 
         for char ∈ split(string, "")
-            if needEpsilonTransition(currentNodes, arrows)
+            while needEpsilonTransition(currentNodes, arrows)
+                currentNodes = epsilonTransition(currentNodes, arrows)
             end
         end
 
