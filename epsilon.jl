@@ -17,10 +17,8 @@ module Epsilon
         return true
     end
 
-    needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow->arrow.fromNode ∈ currentNodes && arrow.value == "ϵ", arrows))
-
-    function epsilonTransition(currentNodes, arrows)
-        indexs = findall(arrow->currentNodes ∈ arrow.fromNode && arrow.value == "ϵ", arrows)
+    function transition(currentNodes, arrows, targetChar)
+        indexs = findall(arrow->currentNodes ∈ arrow.fromNode && arrow.value == targetChar, arrows)
         nextNodes = []
 
         for index ∈ indexs
@@ -29,4 +27,7 @@ module Epsilon
 
         nextNodes
     end
+
+    needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow->arrow.fromNode ∈ currentNodes && arrow.value == "ϵ", arrows))
+    epsilonTransition(currentNodes, arrows) = transition(currentNodes, arrows, "ϵ")
 end

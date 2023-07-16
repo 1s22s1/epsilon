@@ -15,6 +15,13 @@ module TestEpsilon
             @test Epsilon.isaccept(arrows, "0") == true
         end
 
+        @testset "遷移について" begin
+            arrows1 = []
+            push!(arrows1, Epsilon.Arrow(1, 3, "0"))
+
+            @test Epsilon.transition(1, arrows1, "0") == [3]
+        end
+
         @testset "ϵ遷移の判定について" begin
             arrows = []
             push!(arrows, Epsilon.Arrow(0, 1, "ϵ"))
