@@ -5,6 +5,18 @@ module Epsilon
         value::String
     end
 
+    function main()
+        arrows = []
+        push!(arrows, Arrow(0, 1, "ϵ"))
+        push!(arrows, Arrow(0, 2, "ϵ"))
+        push!(arrows, Arrow(1, 3, "0"))
+        push!(arrows, Arrow(2, 4, "1"))
+        push!(arrows, Arrow(3, 5, "ϵ"))
+        push!(arrows, Arrow(4, 5, "ϵ"))
+
+        isaccept(arrows, "0")
+    end
+
     function isaccept(arrows, string)
         currentNodes = [0]
 
@@ -16,11 +28,9 @@ module Epsilon
             currentNodes = transition(currentNodes, arrows, targetChar)
 
             if isempty(currentNodes)
-                return false
+                return break
             end
         end
-
-        true
     end
 
     function transition(currentNodes, arrows, targetChar)
@@ -36,4 +46,10 @@ module Epsilon
 
     needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow->arrow.fromNode ∈ currentNodes && arrow.value == "ϵ", arrows))
     epsilonTransition(currentNodes, arrows) = transition(currentNodes, arrows, "ϵ")
+end
+
+if abspath(PROGRAM_FILE) == @__FILE__
+    using .Epsilon
+
+    Epsilon.main()
 end
