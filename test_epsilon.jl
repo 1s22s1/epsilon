@@ -23,6 +23,14 @@ module TestEpsilon
             @test Epsilon.needEpsilonTransition(0, arrows) == true
             @test Epsilon.needEpsilonTransition(1, arrows) == false
         end
+
+        @testset "ϵ遷移について" begin
+            arrows = []
+            push!(arrows, Epsilon.Arrow(0, 1, "ϵ"))
+            push!(arrows, Epsilon.Arrow(0, 2, "ϵ"))
+
+            @test Epsilon.epsilonTransition(0, arrows) == [1, 2]
+        end
     end
 end
 

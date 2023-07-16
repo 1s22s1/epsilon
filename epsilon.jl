@@ -17,4 +17,15 @@ module Epsilon
     end
 
     needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow->arrow.fromNode ∈ currentNodes && arrow.value == "ϵ", arrows))
+
+    function epsilonTransition(currentNodes, arrows)
+        indexs = findall(arrow->currentNodes ∈ arrow.fromNode && arrow.value == "ϵ", arrows)
+        nextNodes = []
+
+        for index ∈ indexs
+            push!(nextNodes, arrows[index].toNode)
+        end
+
+        nextNodes
+    end
 end
