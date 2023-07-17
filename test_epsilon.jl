@@ -29,6 +29,9 @@ module TestEpsilon
 
         @testset "受理について" begin
             @test Epsilon.isaccept(arrows, [5], "0") == true
+            @test Epsilon.isaccept(arrows, [5], "1") == true
+            @test Epsilon.isaccept(arrows, [5], "2") == false
+            @test Epsilon.isaccept(arrows, [5], "00") == false
         end
     end
 end
