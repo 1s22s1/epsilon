@@ -12,7 +12,7 @@ module TestEpsilon
             push!(arrows, Epsilon.Arrow(3, 5, "ϵ"))
             push!(arrows, Epsilon.Arrow(4, 5, "ϵ"))
 
-            @test Epsilon.isaccept(arrows, "0") == true
+            @test Epsilon.isaccept(arrows, [5], "0") == true
         end
 
         @testset "遷移について" begin

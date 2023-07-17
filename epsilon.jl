@@ -14,10 +14,10 @@ module Epsilon
         push!(arrows, Arrow(3, 5, "ϵ"))
         push!(arrows, Arrow(4, 5, "ϵ"))
 
-        isaccept(arrows, "0")
+        isaccept(arrows, [5], "0")
     end
 
-    function isaccept(arrows, string)
+    function isaccept(arrows, acceptedNode, string)
         currentNodes = [0]
 
         for targetChar ∈ split(string, "")
@@ -31,6 +31,14 @@ module Epsilon
                 return break
             end
         end
+
+        for currentNode ∈ currentNodes
+            if currentNode ∈ acceptedNode
+                return true
+            end
+        end
+
+        false
     end
 
     function transition(currentNodes, arrows, targetChar)
