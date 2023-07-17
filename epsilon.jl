@@ -36,12 +36,20 @@ module Epsilon
             end
         end
 
+        while needEpsilonTransition(currentNodes, arrows)
+            currentNodes = transition(currentNodes, arrows, "ϵ", debug)
+        end
+
         endDebug(debug)
 
         !isempty(currentNodes ∩ acceptedNode)
     end
 
     function transition(currentNodes, arrows, targetChar, debug = false)
+        if debug
+            @printf("遷移します。currentNodes=%s。targetChar=%s\n", string(currentNodes), targetChar)
+        end
+
         nextNodes = []
 
         for currentNode ∈ currentNodes
@@ -51,7 +59,7 @@ module Epsilon
         end
 
         if debug
-            @printf("currentNodes=%s。\n", string(currentNodes))
+            @printf("遷移の結果です。nextNodes=%s。\n", string(nextNodes))
         end
 
         nextNodes
