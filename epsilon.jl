@@ -1,4 +1,6 @@
 module Epsilon
+    using Printf
+
     struct Arrow
         fromNode::Int
         toNode::Int
@@ -14,10 +16,12 @@ module Epsilon
         push!(arrows, Arrow(3, 5, "ϵ"))
         push!(arrows, Arrow(4, 5, "ϵ"))
 
-        isaccept(arrows, [5], "0")
+        isaccept(arrows, [5], "0", true)
     end
 
-    function isaccept(arrows, acceptedNode, string)
+    function isaccept(arrows, acceptedNode, string, debug = false)
+        beginDebug(debug)
+
         currentNodes = [0]
 
         for targetChar ∈ split(string, "")
@@ -31,6 +35,8 @@ module Epsilon
                 return false
             end
         end
+
+        endDebug(debug)
 
         !isempty(intersect(currentNodes, acceptedNode))
     end
@@ -48,6 +54,18 @@ module Epsilon
     end
 
     needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow-> !isempty(intersect(arrow.fromNode, currentNodes)) && arrow.value == "ϵ", arrows))
+
+    function beginDebug(debug)
+        if debug
+            @printf("デバッグモードを開始します。\n")
+        end
+    end
+
+    function endDebug(debug)
+        if debug
+            @printf("デバッグモードを終了します。\n")
+        end
+    end
 end
 
 if abspath(PROGRAM_FILE) == @__FILE__
