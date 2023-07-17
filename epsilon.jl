@@ -29,7 +29,7 @@ module Epsilon
                 currentNodes = transition(currentNodes, arrows, "ϵ")
             end
 
-            currentNodes = transition(currentNodes, arrows, targetChar)
+            currentNodes = transition(currentNodes, arrows, targetChar, debug)
 
             if isempty(currentNodes)
                 return false
@@ -41,13 +41,17 @@ module Epsilon
         !isempty(currentNodes ∩ acceptedNode)
     end
 
-    function transition(currentNodes, arrows, targetChar)
+    function transition(currentNodes, arrows, targetChar, debug = false)
         nextNodes = []
 
         for currentNode ∈ currentNodes
             for index ∈ findall(arrow->currentNode ∈ arrow.fromNode && arrow.value == targetChar, arrows)
                 push!(nextNodes, arrows[index].toNode)
             end
+        end
+
+        if debug
+            @printf("currentNodes=%s。\n", string(currentNodes))
         end
 
         nextNodes
