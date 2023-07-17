@@ -65,7 +65,7 @@ module Epsilon
         nextNodes
     end
 
-    needEpsilonTransition(currentNodes, arrows) = !isempty(filter(arrow-> !isempty(arrow.fromNode ∩ currentNodes) && arrow.value == "ϵ", arrows))
+    needEpsilonTransition(currentNodes, arrows) = any(arrow-> !isempty(arrow.fromNode ∩ currentNodes) && arrow.value == "ϵ", arrows)
 
     function beginDebug(debug)
         if debug
