@@ -38,7 +38,7 @@ module Epsilon
 
         endDebug(debug)
 
-        !isempty(intersect(currentNodes, acceptedNode))
+        !isempty(currentNodes ∩ acceptedNode)
     end
 
     function transition(currentNodes, arrows, targetChar)
@@ -53,7 +53,7 @@ module Epsilon
         nextNodes
     end
 
-    needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow-> !isempty(intersect(arrow.fromNode, currentNodes)) && arrow.value == "ϵ", arrows))
+    needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow-> !isempty(arrow.fromNode ∩ currentNodes) && arrow.value == "ϵ", arrows))
 
     function beginDebug(debug)
         if debug
