@@ -52,7 +52,7 @@ module Epsilon
         nextNodes
     end
 
-    needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow->arrow.fromNode ∈ currentNodes && arrow.value == "ϵ", arrows))
+    needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow-> !isempty(intersect(arrow.fromNode, currentNodes)) && arrow.value == "ϵ", arrows))
     epsilonTransition(currentNodes, arrows) = transition(currentNodes, arrows, "ϵ")
 end
 
