@@ -42,11 +42,12 @@ module Epsilon
     end
 
     function transition(currentNodes, arrows, targetChar)
-        indexs = findall(arrow->currentNodes ∈ arrow.fromNode && arrow.value == targetChar, arrows)
         nextNodes = []
 
-        for index ∈ indexs
-            push!(nextNodes, arrows[index].toNode)
+        for currentNode ∈ currentNodes
+            for index ∈ findall(arrow->currentNode ∈ arrow.fromNode && arrow.value == targetChar, arrows)
+                push!(nextNodes, arrows[index].toNode)
+            end
         end
 
         nextNodes
