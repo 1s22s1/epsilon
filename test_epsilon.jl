@@ -27,8 +27,8 @@ module TestEpsilon
             @test Epsilon.transition([4], arrows, "ϵ") == [5]
         end
 
-        @testset "選択の場合" begin
-            # @test Epsilon.isaccept(arrows, [5], "0") == true
+        @testset "受理について" begin
+            @test Epsilon.isaccept(arrows, [5], "0") == true
         end
     end
 end

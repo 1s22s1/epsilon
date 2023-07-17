@@ -22,23 +22,17 @@ module Epsilon
 
         for targetChar ∈ split(string, "")
             while needEpsilonTransition(currentNodes, arrows)
-                currentNodes = epsilonTransition(currentNodes, arrows)
+                currentNodes = transition(currentNodes, arrows, "ϵ")
             end
 
             currentNodes = transition(currentNodes, arrows, targetChar)
 
             if isempty(currentNodes)
-                return break
+                return false
             end
         end
 
-        for currentNode ∈ currentNodes
-            if currentNode ∈ acceptedNode
-                return true
-            end
-        end
-
-        false
+        !isempty(intersect(currentNodes, acceptedNode))
     end
 
     function transition(currentNodes, arrows, targetChar)
@@ -54,7 +48,6 @@ module Epsilon
     end
 
     needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow-> !isempty(intersect(arrow.fromNode, currentNodes)) && arrow.value == "ϵ", arrows))
-    epsilonTransition(currentNodes, arrows) = transition(currentNodes, arrows, "ϵ")
 end
 
 if abspath(PROGRAM_FILE) == @__FILE__
