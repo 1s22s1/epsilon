@@ -53,8 +53,8 @@ module Epsilon
         nextNodes = []
 
         for currentNode ∈ currentNodes
-            for index ∈ findall(arrow->currentNode ∈ arrow.fromNode && arrow.value == targetChar, arrows)
-                push!(nextNodes, arrows[index].toNode)
+            for element ∈ filter(arrow->currentNode ∈ arrow.fromNode && arrow.value == targetChar, arrows)
+                push!(nextNodes, element.toNode)
             end
         end
 
@@ -65,7 +65,7 @@ module Epsilon
         nextNodes
     end
 
-    needEpsilonTransition(currentNodes, arrows) = !isempty(findall(arrow-> !isempty(arrow.fromNode ∩ currentNodes) && arrow.value == "ϵ", arrows))
+    needEpsilonTransition(currentNodes, arrows) = !isempty(filter(arrow-> !isempty(arrow.fromNode ∩ currentNodes) && arrow.value == "ϵ", arrows))
 
     function beginDebug(debug)
         if debug
