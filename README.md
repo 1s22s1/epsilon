@@ -2,7 +2,6 @@
 
 We simulate ϵ-NFA.
 
-## シュミレートの実行方法
 ## How to run simulate
 
 ```console
