@@ -11,14 +11,14 @@ module TestEpsilon
         push!(arrows, Epsilon.Arrow(3, 5, "ϵ"))
         push!(arrows, Epsilon.Arrow(4, 5, "ϵ"))
 
-        @testset "ϵ遷移の判定について" begin
+        @testset "On needing epision transition" begin
             @test Epsilon.needEpsilonTransition([0], arrows) == true
             @test Epsilon.needEpsilonTransition([1, 2], arrows) == false
             @test Epsilon.needEpsilonTransition([3], arrows) == true
             @test Epsilon.needEpsilonTransition([4], arrows) == true
         end
 
-        @testset "遷移について" begin
+        @testset "On transition" begin
             @test Epsilon.transition([0], arrows, "ϵ") == [1, 2]
             @test Epsilon.transition([1, 2], arrows, "0") == [3]
             @test Epsilon.transition([1, 2], arrows, "1") == [4]
@@ -27,7 +27,7 @@ module TestEpsilon
             @test Epsilon.transition([4], arrows, "ϵ") == [5]
         end
 
-        @testset "受理について" begin
+        @testset "On Accepte" begin
             @test Epsilon.isaccept(arrows, [5], "0") == true
             @test Epsilon.isaccept(arrows, [5], "1") == true
             @test Epsilon.isaccept(arrows, [5], "2") == false

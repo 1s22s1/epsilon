@@ -47,7 +47,7 @@ module Epsilon
 
     function transition(currentNodes, arrows, targetChar, debug = false)
         if debug
-            @printf("遷移します。currentNodes=%s。targetChar=%s\n", string(currentNodes), targetChar)
+            @printf("Run transition. currentNodes=%s。targetChar=%s\n", string(currentNodes), targetChar)
         end
 
         nextNodes = []
@@ -59,7 +59,7 @@ module Epsilon
         end
 
         if debug
-            @printf("遷移の結果です。nextNodes=%s。\n", string(nextNodes))
+            @printf("This is result of transition. nextNodes=%s。\n", string(nextNodes))
         end
 
         nextNodes
@@ -69,13 +69,13 @@ module Epsilon
 
     function beginDebug(debug)
         if debug
-            @printf("デバッグモードを開始します。\n")
+            @printf("Start debug mode\n")
         end
     end
 
     function endDebug(debug)
         if debug
-            @printf("デバッグモードを終了します。\n")
+            @printf("Finish debug mode\n")
         end
     end
 end
